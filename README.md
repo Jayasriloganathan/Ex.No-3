@@ -57,12 +57,30 @@ int main() {
 ```
 
 ## INPUT
+```
+%{
+#include "expr3.tab.h"
+#include <stdlib.h>
+%}
 
-<img width="566" height="390" alt="image" src="https://github.com/user-attachments/assets/88721858-ad61-4aab-82e0-096871a6c4d1" />
+%%
+[0-9]+      { yylval = atoi(yytext); return NUMBER; }
+[a-zA-Z]    { return ID; }
+[ \t]       ; // ignore whitespace
+[\n]        return '\n';
+.           return yytext[0];
+%%
 
+int yywrap() {
+    return 1;
+}
+
+
+
+```
 ## OUTPUT
 
-<img width="1920" height="1020" alt="image" src="https://github.com/user-attachments/assets/2efbf12a-2a7e-4a50-9039-209946dc50a7" />
+<img width="1363" height="736" alt="image" src="https://github.com/user-attachments/assets/3f297c01-2b4c-4091-8b17-fc388c130906" />
 
 ## RESULT
 A YACC program to recognize a valid arithmetic expression that uses operator +,-,* and / is executed successfully and the output is verified.
